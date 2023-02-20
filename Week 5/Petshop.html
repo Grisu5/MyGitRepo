@@ -4,6 +4,7 @@
             <meta charset="UTF-8">
             <title>Vue Petshop</title>
             <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
         </head>
         
         <body>    
@@ -11,20 +12,34 @@
                 <header>
                     <h1 v-text="sitename"></h1>
                 </header>
+                <button v-on:click="showCheckout">
+                  {{cartItemCount}}
+                  <span class="fa-solid fa-cart-shopping"></span> Checkout
+                </button>
                 <main>
-                    <figure>
-                    <img v-bind:src="product.image">
-                    </figure>
+                    <div v-if="showProduct">
+                        <figure>
+                        <img v-bind:src="product.image">
+                        </figure>
 
-                    <h2 v-text="product.title"></h2>
+                        <h2 v-text="product.title"></h2>
 
-                    <p v-text="product.description"></p>
+                        <p v-text="product.description"></p>
 
-                    <p>Price: {{product.price}}</p>
-                    <button> 
-                        <input type="button" value="add" v-on:click='addToCart'>
-                    </button>
-                    
+                        <p>Price: {{product.price}}</p>
+
+                        <button v-on:click='addToCart' v-if="canAddToCart"> 
+                            Add to cart
+                        </button>
+                        <button disabled="disabled" v-else> 
+                            Add to cart
+                        </button>
+                    </div>
+
+                    <div v-else>
+                        <h2>Checkout</h2>
+                    </div>
+  
                 </main>
             </div>
     
@@ -40,21 +55,34 @@
                             title: "Afk Cat",
                             description: "A nice looking, cute cat " + "for those looking for some love in their lives.",
                             price: 500,
-                            image: "img/cat.jpg"
+                            image: "img/cat.jpg",
+                            availableInventory: 3,
+                            
                             
                         },
+                        showProduct: true,
+
                         cart: []
                         
                     },
                     methods: {
                     addToCart: function() {
                         this.cart.push(this.product.id)
+                    },
+                    showCheckout (){
+                        this.showProduct= this.showProduct ? false : true;
+
                     }
+                    
                 },
-                computed: {
+                    computed: {
                     cartItemCount: function() {
                         return this.cart.length || '';
+                    },
+                    canAddToCart: function() {
+                        return this.product.availableInventory > this.cartItemCount;
                     }
+
                 }
                         
 
