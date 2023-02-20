@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Vue Petshop</title>
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+        </head>
+        
+        <body>    
+            <div id="app">
+                <header>
+                    <h1 v-text="sitename"></h1>
+                </header>
+                <main>
+                    <figure>
+                    <img v-bind:src="product.image">
+                    </figure>
+
+                    <h2 v-text="product.title"></h2>
+
+                    <p v-text="product.description"></p>
+
+                    <p>Price: {{product.price}}</p>
+                    <button> 
+                        <input type="button" value="add" v-on:click='addToCart'>
+                    </button>
+                    
+                </main>
+            </div>
+    
+            <script>
+            
+                var webstore = new Vue ({
+
+                    el: '#app',
+                    data: {
+                        sitename: 'Vue Petshop',
+                        product: {
+                            id: 111,
+                            title: "Afk Cat",
+                            description: "A nice looking, cute cat " + "for those looking for some love in their lives.",
+                            price: 500,
+                            image: "img/cat.jpg"
+                            
+                        },
+                        cart: []
+                        
+                    },
+                    methods: {
+                    addToCart: function() {
+                        this.cart.push(this.product.id)
+                    }
+                },
+                computed: {
+                    cartItemCount: function() {
+                        return this.cart.length || '';
+                    }
+                }
+                        
+
+
+                    
+
+               });
+              
+            </script>
+        </body>
+    </html>
