@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <title>Vue Petshop</title>
+            <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+        </head>
+        
+        <body>    
+            <div id="app">
+                <header>
+                    <h1 v-text="sitename"></h1>
+                </header>
+                <button v-on:click="showCheckout">
+                  {{cartItemCount}}
+                  <span class="fa-solid fa-cart-shopping"></span> Checkout
+                </button>
+                <main>
+                    <div v-if="showProduct">
+                        <figure>
+                        <img v-bind:src="product.image">
+                        </figure>
+
+                        <h2 v-text="product.title"></h2>
+
+                        <p v-text="product.description"></p>
+
+                        <p>Price: {{product.price}}</p>
+
+                        <button v-on:click='addToCart' v-if="canAddToCart"> 
+                            Add to cart
+                        </button>
+                        <button disabled="disabled" v-else> 
+                            Add to cart
+                        </button>
+                    </div>
+
+                    <div v-else>
+                        <h2>Checkout</h2>
+                        <p>
+                            <strong> Frist Name:</strong>
+                            <input v-model="order.firstName"/>
+                        </p>
+
+                        <p>
+                            <strong> Last Name:</strong>
+                            <input v-model="order.lastName"/>
+                        </p>
+                        <p>
+                            <strong> Address:</strong>
+                            <input v-model="order.address"/>
+                        </p>
+                        <p>
+                            <strong> City:</strong>
+                            <input v-model="order.city"/>
+                        </p>
+                        <p>
+                            <strong> State:</strong>
+                            <select v-model="order.state">
+                                <option disabled value="">State</option>
+                                <option>AL</option>
+                                <option>AR</option>
+                                <option>CA</option>
+                                <option>NV</option>
+                            </select>
+                        </p>
+                        <P> 
+                            <strong>Zip/Postal Code:</strong>
+                            <input v-model="order.zip"/>
+                        </P>
+                        <P> 
+                            <input type="checkbox" id="gift" value ="ture" v-model="order.gift"/>
+                            <label for="gift"> Ship As Gift? </label>
+                        </P>
+                        <P> 
+                            <input type="radio" id="home" value ="Home" v-model="order.method"/>
+                            <label for="home"> Home </label>
+                            <input type="radio" id="business" value ="Business" v-model="order.method"/>
+                            <label for="home"> Business </label>
+                        </P>                       
+                        
+                        <h2>Order Information</h2>
+                        <p>First Name: {{order.firstName}}</p>
+                        <p>Last Name: {{order.lastName}}</p>
+                        <p>Address: {{order.address}}</p>
+                        <p>City: {{order.city}}</p>
+                        <p>Zip: {{order.zip}}</p>
+                        <p>State: {{order.state}}</p>
+                    </div>
+  
+                </main>
+            </div>
+    
+            <script>
+            
+                var webstore = new Vue ({
+
+                    el: '#app',
+                    data: {
+                        sitename: 'Vue Petshop',
+                        product: {
+                            id: 111,
+                            title: "Afk Cat",
+                            description: "A nice looking, cute cat " + "for those looking for some love in their lives.",
+                            price: 500,
+                            image: "img/cat.jpg",
+                            availableInventory: 3,
+                            
+                            
+                        },
+
+                        showProduct: true,
+
+                        cart: [],
+
+                        order: {
+                            firstName: '',
+                            lastName:'',
+                            address:'',
+                            city:'',
+                            zip:'',
+                            state:'',
+                            gift:'',
+                            methods:'',
+
+                        }
+                        
+                    },
+
+                    methods: {
+                    addToCart: function() {
+                        this.cart.push(this.product.id)
+                    },
+                    showCheckout (){
+                        this.showProduct= this.showProduct ? false : true;
+
+                    }
+                    
+                },
+
+                    computed: {
+                    cartItemCount: function() {
+                        return this.cart.length || '';
+                    },
+                    canAddToCart: function() {
+                        return this.product.availableInventory > this.cartItemCount;
+                    }
+
+                }
+                        
+
+
+                    
+
+               });
+              
+            </script>
+        </body>
+    </html>
