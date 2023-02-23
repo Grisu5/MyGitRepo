@@ -70,7 +70,8 @@
                             <input v-model="order.zip"/>
                         </P>
                         <P> 
-                            <input type="checkbox" id="gift" value ="ture" v-model="order.gift"/>
+                            <input type="checkbox" id="gift" value ="ture" v-model="order.gift" 
+                            v-bind:true-value="order.sendGift" v-bind:false-value="dontSendGift"/>
                             <label for="gift"> Ship As Gift? </label>
                         </P>
                         <P> 
@@ -87,6 +88,10 @@
                         <p>City: {{order.city}}</p>
                         <p>Zip: {{order.zip}}</p>
                         <p>State: {{order.state}}</p>
+                        <p>Gift: {{order.gift}}</p>
+                        <p>Method: {{order.method}}</p>
+
+                        <p><button v-on:click="submitForm"> Place Order </button></p>
                     </div>
   
                 </main>
@@ -121,8 +126,10 @@
                             city:'',
                             zip:'',
                             state:'',
-                            gift:'',
-                            methods:'',
+                            gift: false,
+                            method:'Home',
+                            sendGift: 'Send as a gift',
+                            dontSendGift: 'Do not send as gift',
 
                         }
                         
@@ -135,6 +142,9 @@
                     showCheckout (){
                         this.showProduct= this.showProduct ? false : true;
 
+                    },
+                    submitForm(){
+                        alert('Order submitted');
                     }
                     
                 },
