@@ -4,6 +4,7 @@
             <meta charset="UTF-8">
             <title>Vue Petshop</title>
             <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+            <script src ="products.js"></script>
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
         </head>
         
@@ -18,22 +19,36 @@
                 </button>
                 <main>
                     <div v-if="showProduct">
-                        <figure>
-                        <img v-bind:src="product.image">
-                        </figure>
+                        <div v-for="product in products">
+                            <figure>
+                                 <img v-bind:src="product.image">
+                            </figure>
 
-                        <h2 v-text="product.title"></h2>
+                            <h2 v-text="product.title"></h2>
 
-                        <p v-text="product.description"></p>
+                             <p v-text="product.description"></p>
 
-                        <p>Price: {{product.price}}</p>
+                            <p>Price: {{product.price}}</p>
 
-                        <button v-on:click='addToCart' v-if="canAddToCart"> 
+                            <button v-on:click='addToCart(product)' v-if="canAddToCart(product)"> 
                             Add to cart
-                        </button>
-                        <button disabled="disabled" v-else> 
-                            Add to cart
-                        </button>
+                            </button>
+                            <button disabled="disabled" v-else> 
+                                Add to cart
+                            </button>
+                            <span v-if ="product.availableInventory === cartCount()">
+                                All out!
+                            </span>    
+                            <span v-else-if="product.availableInventory - cartCount() < 5">
+                                Only {{product.availableInventory - cartCount(product)}} left! 
+                            </span>
+                            <span v-else> Buy now!</span>
+                            <div>
+                                <i class="fa-solid fa-star" v-for="n in product.rating"></i>
+                                <span v-for="n in 5 - product.rating"> <i class="fa-regular fa-star"></i></span>
+                            </div>
+                        </div>
+
                     </div>
 
                     <div v-else>
@@ -96,24 +111,24 @@
   
                 </main>
             </div>
-    
             <script>
-            
+                console.log(products)
                 var webstore = new Vue ({
 
                     el: '#app',
                     data: {
                         sitename: 'Vue Petshop',
-                        product: {
-                            id: 111,
-                            title: "Afk Cat",
-                            description: "A nice looking, cute cat " + "for those looking for some love in their lives.",
-                            price: 500,
-                            image: "img/cat.jpg",
-                            availableInventory: 3,
+                        products: products,
+                       // product: {
+                         //   id: 111,
+                        // title: "Afk Cat",
+                         //   description: "A nice looking, cute cat " + "for those looking for some love in their lives.",
+                         //   price: 500,
+                          //  image: "img/cat.jpg",
+                          //  availableInventory: 10,
+                           // rating: 2,
                             
-                            
-                        },
+                      //  },
 
                         showProduct: true,
 
@@ -142,8 +157,8 @@
                     },
 
                     methods: {
-                    addToCart: function() {
-                        this.cart.push(this.product.id)
+                    addToCart (product) {
+                        this.cart.push(product.id)
                     },
                     showCheckout (){
                         this.showProduct= this.showProduct ? false : true;
@@ -151,6 +166,18 @@
                     },
                     submitForm(){
                         alert('Order submitted');
+                    },
+                    canAddToCart(product) {
+                        return  product.availableInventory > this.cartCount(product.id);
+                    },
+                    cartCount(id) {
+                        let count = 0;
+                        for (let i=0; i < this.cart.length; i++){
+                            if (this.cart[i] === id){
+                                count++;
+                            }
+                        }
+                        return count;
                     }
                     
                 },
@@ -159,9 +186,10 @@
                     cartItemCount: function() {
                         return this.cart.length || '';
                     },
-                    canAddToCart: function() {
-                        return this.product.availableInventory > this.cartItemCount;
+                    sorttedProducts() {
+                        let products
                     }
+
 
                 }
                         
