@@ -2,8 +2,10 @@
     <html lang="en">
         <head>
             <meta charset="UTF-8">
-            <title>After School Club</title>
+            <title>Vue Petshop</title>
             <script src="https://cdn.jsdelivr.net/npm/vue@2.7.14/dist/vue.js"></script>
+            <script src ="sessions.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
         </head>
         
         <body>    
@@ -11,15 +13,66 @@
                 <header>
                     <h1 v-text="sitename"></h1>
                 </header>
-                <main>
-                    <figure>
-                        <img v-bind:src="Lesson.image">
-                    </figure>
-                    <h2 v-text="Lesson.subject"></h2>
-                    <h2 v-text="Lesson.location"></h2>
 
-                    <p>Price: {{Lesson.price}}</p>
+                <button v-on:click="showCheckout">
+                    {{cartItemCount}}
+                    <span class="fa-solid fa-cart-shopping"></span> Checkout
+                </button>
+  
+                <main>
+                    <div v-if="showSession">
+                        <div v-for="session in sessions">
+                           <!-- <figure>
+                                 <img v-bind:src="session.image">
+                            </figure>
+                            -->
+                            <i :class="session.icon"></i>
+
+                            <h2 v-text="session.title"></h2>
+
+                            <p>Price: {{session.price}}</p>
+                            <p>Location: {{session.location}}</p>
+                            
+                            <p>Space:</p>
+
+                            <button v-on:click='addToCart(session)' v-if="canAddToCart(session)"> 
+                            Add to cart
+                            </button>
+                            <button disabled="disabled" v-else> 
+                                Add to cart
+                            </button>
+                            
+
+                        </div>
+                    </div>
+                    
+                    <div v-else>
+                        <h2>Checkout</h2>
+                        <p>
+                            <strong>Name:</strong>
+                            <input v-model.trim="order.name"/>
+                        </p>
+
+                        <P> 
+                            <strong>Phone:</strong>
+                            <input type="number" v-model.number="order.phone"  />
+                        </P> 
+
+                        <h2>Booking Information</h2>
+                        <p>Name: {{order.name}}</p>
+                        <p>Phone: {{order.phone}}</p>
+                        <p>
+                            <button v-on:click="submitForm"> Place Order </button>
+                        </p>                   
+                        
+
+                    </div>
+
+
                 </main>
+
+
+
             </div>
     
             <script>
@@ -27,18 +80,67 @@
                 var club = new Vue ({
 
                     el: '#app',
-                    data: {
+                    data: 
+                    {
+
                         sitename: 'AFTER SCHOOL CLUB',
                         
-                        Lesson: {
-                            image: "images/math.png",
-                            subject: "Math",
-                            location: "Khartoum",
-                            price: 55,
+                        sessions: sessions, 
+
+                        showSession: true,
+
+                        cart: [],
+
+                        order: 
+                        {
+                            name: '',
+                            phone: '',
                         }
 
 
-                    }
+                    },
+                    
+                    methods: 
+                    {
+
+                        addToCart (session) {
+                        this.cart.push(session.id)
+                        },
+                        showCheckout (){
+                        this.showSession= this.showSession ? false : true;
+
+                        },
+                        submitForm(){
+                        alert('Request submitted');
+                         },
+                         canAddToCart(session) {
+                        return  session.availableInventory > this.cartCount(session.id);
+                        },
+                        cartCount(id) {
+                        let count = 0;
+                        for (let i=0; i < this.cart.length; i++){
+                            if (this.cart[i] === id){
+                                count++;
+                            }
+                        }
+                        return count;
+                                     }
+
+
+                    },
+
+                    computed:  
+                {
+                    cartItemCount: function() {
+                        return this.cart.length || '';
+                    },
+
+
+
+
+                }
+
+                    
 
                });
               
