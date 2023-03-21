@@ -4,7 +4,7 @@ sessions = [
         title: "Dance",
         price: 500,
         icon: "fa-solid fa-music",
-        availableInventory: 5,
+        spaces: 5,
         location: "Omdurman"
     },
 
@@ -13,7 +13,7 @@ sessions = [
             title: "Music",
             price: 700,
             image: "img/cat.jpg",
-            availableInventory: 5,
+            spaces: 5,
             location: "Khartoum"
 
     },
@@ -23,7 +23,7 @@ sessions = [
             title: "Photography",
             price: 400,
             image: "img/cat.jpg",
-            availableInventory: 3,
+            spaces: 5,
             location: "Bahri"
 
     },
@@ -33,7 +33,7 @@ sessions = [
             title: "Football",
             price: 800,
             image: "img/cat.jpg",
-            availableInventory: 5,
+            spaces: 5,
             location: "Khartoum"
 
     },
@@ -43,7 +43,7 @@ sessions = [
             title: "Film",
             price: 700,
             image: "img/cat.jpg",
-            availableInventory: 5,
+            spaces: 5,
             location: "Bahri"
 
     },
@@ -53,7 +53,7 @@ sessions = [
             title: "Programming",
             price: 100,
             image: "img/cat.jpg",
-            availableInventory: 5,
+            spaces: 5,
             location: "Omdurman"
 
     },
@@ -63,7 +63,7 @@ sessions = [
             title: "Graphics Design",
             price: 300,
             image: "img/cat.jpg",
-            availableInventory: 5,
+            spaces: 5,
             location: "Bahri"
 
     },
@@ -73,7 +73,8 @@ sessions = [
             title: "Fashion",
             price: 400,
             image: "img/cat.jpg",
-            availableInventory: 5,
+            spaces: 5,
+            location: "Bahri"
     }, 
 
     {
@@ -81,7 +82,7 @@ sessions = [
             title: "Creative writing",
             price: 100,
             image: "img/cat.jpg",
-            availableInventory: 5,
+            spaces: 5,
             location: "Khartoum"
 
     },
@@ -91,7 +92,7 @@ sessions = [
             title: "Mindfullness",
             price: 50,
             image: "img/cat.jpg",
-            availableInventory: 5,
+            spaces: 5,
             location: "Omdurman"
 
     },

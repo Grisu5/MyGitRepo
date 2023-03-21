@@ -18,14 +18,35 @@
                     {{cartItemCount}}
                     <span class="fa-solid fa-cart-shopping"></span> Checkout
                 </button>
+             
   
                 <main>
+                   
                     <div v-if="showSession">
-                        <div v-for="session in sessions">
-                           <!-- <figure>
-                                 <img v-bind:src="session.image">
-                            </figure>
-                            -->
+                        <div>
+                            <input type="radio" value= "Ascending" id="ascending" v-model="ascendSort"/> 
+                            <Label for="ascending"> Ascending</Label>
+                            <input type="radio" value= "Descending" id="descending" v-model="ascendSort"/>
+                            <label for="descending"> Descending</label>
+                        </div>
+    
+                        <div>
+                            <input type="text" v-model="searchTaken" placeholder="Search"/>
+                        </div>
+                        <br>
+                        <div>
+                            <label> Sort by</label>
+                            <select name="sort" v-model="sort">
+                                <option>--Sort By--</option>
+                                <option value="title">title</option>
+                                <option value="price">price</option>
+                                <option value="location">location</option>
+                                <option value="spaces">spaces</option>
+                            </select>
+                        </div>
+                        <br>
+                        <div v-for="session in filterSessions()">
+                          
                             <i :class="session.icon"></i>
 
                             <h2 v-text="session.title"></h2>
@@ -33,7 +54,7 @@
                             <p>Price: {{session.price}}</p>
                             <p>Location: {{session.location}}</p>
                             
-                            <p>Space:</p>
+                            <p>Space:{{session.spaces}}</p>
 
                             <button v-on:click='addToCart(session)' v-if="canAddToCart(session)"> 
                             Add to cart
@@ -41,28 +62,43 @@
                             <button disabled="disabled" v-else> 
                                 Add to cart
                             </button>
-                            
-
+                           
+                        
                         </div>
                     </div>
                     
                     <div v-else>
                         <h2>Checkout</h2>
+
+                        <div v-for="lesson in chechOut()">
+
+                            <h2 v-text="lesson.session.title"></h2>
+
+                            <p>Price: {{lesson.session.price}}</p>
+
+                            <p>Location: {{lesson.session.location}}</p>
+                            <button v-on:click='removeCartItem(lesson)'> 
+                                Remove Session
+                                </button>
+    
+
+                        </div>
                         <p>
                             <strong>Name:</strong>
-                            <input v-model.trim="order.name"/>
+                            <input v-model.trim="name"/>
                         </p>
 
                         <P> 
                             <strong>Phone:</strong>
-                            <input type="number" v-model.number="order.phone"  />
+                            <input type="number" v-model.number="phone"  />
                         </P> 
 
                         <h2>Booking Information</h2>
-                        <p>Name: {{order.name}}</p>
-                        <p>Phone: {{order.phone}}</p>
+                        <p>Name: {{name}}</p>
+                        <p>Phone: {{phone}}</p>
                         <p>
-                            <button v-on:click="submitForm"> Place Order </button>
+                            <button disabled="disabled" v-if="!Correct"> Place Order </button>
+                            <button v-else v-on:click="submitForm" type="submit"> Place Order </button>
                         </p>                   
                         
 
@@ -91,11 +127,16 @@
 
                         cart: [],
 
-                        order: 
-                        {
+                      
                             name: '',
                             phone: '',
-                        }
+                        
+
+                        ascendSort: 'Ascending',
+
+                        searchTaken: '',
+
+                        sort:'--Sort By--'
 
 
                     },
@@ -104,17 +145,55 @@
                     {
 
                         addToCart (session) {
-                        this.cart.push(session.id)
+                           for(let i = 0; i < this.sessions.length; i++)
+                           {
+                            const sub = this.sessions[i];
+                            if(session.id == sub.id)
+                            {
+                                sub.spaces--
+                                break
+                            }
+                           }
+                            const id = Math.ceil(Math.random()*10000)+`${session.title}`
+                            this.cart.push({id:id, "session":session})
+               
+                       
                         },
+
                         showCheckout (){
                         this.showSession= this.showSession ? false : true;
 
                         },
+
+                        chechOut() {
+                                let show = this.cart
+                                return show
+                        },
+
+                        removeCartItem(cartSession) {
+
+                            for (let i = 0; i < sessions.length; i++) {
+                                const lssn = this.sessions[i];
+
+                           if (cartSession.session.id == lssn.id) {
+                             lssn.spaces++
+                             break;
+                            }
+                            }
+                            for (let i = 0; i < this.cart.length; i++) {
+                                const item = this.cart[i];
+                            if (cartSession.id == item.id) {
+                                    this.cart.splice (i,1)
+                                    break;
+   
+                                    }
+                             }
+                   },
                         submitForm(){
                         alert('Request submitted');
                          },
                          canAddToCart(session) {
-                        return  session.availableInventory > this.cartCount(session.id);
+                        return  session.spaces > this.cartCount(session.id);
                         },
                         cartCount(id) {
                         let count = 0;
@@ -124,16 +203,99 @@
                             }
                         }
                         return count;
-                                     }
+                                     },
 
 
+                
+
+                    sortPrice: function(priceArray){
+                        function compare(a,b) {
+                            if (a.price > b.price)
+                                return 1;
+                            if (a.price < b.price)
+                                return -1;
+                            return 0;
+                        }
+                        return priceArray.sort(compare);
                     },
+
+                    sortLocation: function(locationArray){
+                        function compare(a,b) {
+                            if (a.location > b.location)
+                                return 1;
+                            if (a.location < b.location)
+                                return -1;
+                            return 0;
+                        }
+                        return locationArray.sort(compare);
+                        
+                    },
+                    sortTitle: function(titleArray){
+                        function compare(a,b) {
+                            if (a.title > b.title)
+                                return 1;
+                            if (a.title < b.title)
+                                return -1;
+                            return 0;
+                        }
+                        return titleArray.sort(compare);
+                        
+                    },
+                    sortSpaces: function(spacesArray){
+                        function compare(a,b) {
+                            if (a.spaces > b.spaces)
+                                return 1;
+                            if (a.spaces < b.spaces)
+                                return -1;
+                            return 0;
+                        }
+                        return spacesArray.sort(compare);                
+                    },
+
+                    filterSessions: function() {
+                        let lessonses = this.sessions
+                 
+                        lessonses = lessonses.filter((session) => {
+                          
+                            return session.title.toLowerCase().match(this.searchTaken.toLowerCase()) || session.location.toLowerCase().match(this.searchTaken.toLowerCase())
+                            
+                        }) 
+
+                        if (this.sort == 'price') {
+                            lessonses = this.sortPrice(lessonses)
+                        }
+                        else if (this.sort =='title') {
+                            lessonses = this.sortTitle(lessonses)
+                        }
+                        else if (this.sort =='location') {
+                            lessonses = this.sortLocation(lessonses)
+                        }
+                        else if (this.sort =='spaces') {
+                            lessonses = this.sortSpaces(lessonses)
+                        }
+
+                        if (this.ascendSort == 'Ascending'){
+                            return lessonses
+                        }
+                        else if (this.ascendSort =='Descending'){
+                            return lessonses.reverse()
+                        }
+                        return lessonses
+                        
+                    }
+                },
+                    
 
                     computed:  
                 {
                     cartItemCount: function() {
                         return this.cart.length || '';
                     },
+                    Correct: function(){
+                        return this.name.trim () !=='' && this.phone !==''
+                    }
+
+
 
 
 
