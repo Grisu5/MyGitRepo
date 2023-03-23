@@ -1,0 +1,9 @@
+{
+    "name": "playing-with-Node",
+    "author": "Elhassan Elnasir",
+    "private": true,
+    "version": "1.0.1",
+    "dependencies": {
+        "mustache": "^4.2.0"
+    }
+}
