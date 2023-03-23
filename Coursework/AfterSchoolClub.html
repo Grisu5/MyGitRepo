@@ -13,11 +13,12 @@
                 <header>
                     <h1 v-text="sitename"></h1>
                 </header>
-
+                
                 <button v-on:click="showCheckout">
                     {{cartItemCount}}
                     <span class="fa-solid fa-cart-shopping"></span> Checkout
                 </button>
+                <br>
              
   
                 <main>
@@ -28,20 +29,22 @@
                             <Label for="ascending"> Ascending</Label>
                             <input type="radio" value= "Descending" id="descending" v-model="ascendSort"/>
                             <label for="descending"> Descending</label>
+                            <br>
                         </div>
     
                         <div>
                             <input type="text" v-model="searchTaken" placeholder="Search"/>
+                            <br>
                         </div>
                         <br>
                         <div>
                             <label> Sort by</label>
                             <select name="sort" v-model="sort">
                                 <option>--Sort By--</option>
-                                <option value="title">title</option>
-                                <option value="price">price</option>
-                                <option value="location">location</option>
-                                <option value="spaces">spaces</option>
+                                <option value="title">Title</option>
+                                <option value="price">Price</option>
+                                <option value="location">Location</option>
+                                <option value="spaces">Spaces</option>
                             </select>
                         </div>
                         <br>

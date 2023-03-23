@@ -91,7 +91,7 @@ sessions = [
             id: 110,
             title: "Mindfullness",
             price: 50,
-            Image: "",
+            icon: "fa-regular fa-circle",
             spaces: 5,
             location: "Omdurman"
 
