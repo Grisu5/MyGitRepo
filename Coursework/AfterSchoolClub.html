@@ -46,7 +46,7 @@
                         </div>
                         <br>
                         <div v-for="session in filterSessions()">
-                          
+                                <br>
                             <i :class="session.icon"></i>
 
                             <h2 v-text="session.title"></h2>
@@ -55,14 +55,14 @@
                             <p>Location: {{session.location}}</p>
                             
                             <p>Space:{{session.spaces}}</p>
-
+                            
                             <button v-on:click='addToCart(session)' v-if="canAddToCart(session)"> 
                             Add to cart
                             </button>
                             <button disabled="disabled" v-else> 
                                 Add to cart
                             </button>
-                           
+                            <br> 
                         
                         </div>
                     </div>

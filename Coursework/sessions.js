@@ -1,7 +1,7 @@
 sessions = [
     {   
         id: 111,
-        title: "Dance",
+        title: "Music",
         price: 500,
         icon: "fa-solid fa-music",
         spaces: 5,
@@ -10,9 +10,9 @@ sessions = [
 
     {   
             id: 112,
-            title: "Music",
+            title: "Dance",
             price: 700,
-            image: "img/cat.jpg",
+            icon: "fa-solid fa-drum",
             spaces: 5,
             location: "Khartoum"
 
@@ -22,7 +22,7 @@ sessions = [
             id: 113,
             title: "Photography",
             price: 400,
-            image: "img/cat.jpg",
+            icon: "fa-solid fa-image",
             spaces: 5,
             location: "Bahri"
 
@@ -32,7 +32,7 @@ sessions = [
             id: 114,
             title: "Football",
             price: 800,
-            image: "img/cat.jpg",
+            icon: "fa-regular fa-futbol",
             spaces: 5,
             location: "Khartoum"
 
@@ -42,7 +42,7 @@ sessions = [
             id: 115,
             title: "Film",
             price: 700,
-            image: "img/cat.jpg",
+            icon: "fa-solid fa-film",
             spaces: 5,
             location: "Bahri"
 
@@ -52,7 +52,7 @@ sessions = [
             id: 116,
             title: "Programming",
             price: 100,
-            image: "img/cat.jpg",
+            icon: "fa-solid fa-code",
             spaces: 5,
             location: "Omdurman"
 
@@ -62,7 +62,7 @@ sessions = [
             id: 117,
             title: "Graphics Design",
             price: 300,
-            image: "img/cat.jpg",
+            icon: "fa-solid fa-object-group",
             spaces: 5,
             location: "Bahri"
 
@@ -72,7 +72,7 @@ sessions = [
             id: 118,
             title: "Fashion",
             price: 400,
-            image: "img/cat.jpg",
+            icon: "fa-solid fa-vest-patches",
             spaces: 5,
             location: "Bahri"
     }, 
@@ -81,7 +81,7 @@ sessions = [
             id: 119,
             title: "Creative writing",
             price: 100,
-            image: "img/cat.jpg",
+            icon: "fa-solid fa-pen",
             spaces: 5,
             location: "Khartoum"
 
@@ -91,7 +91,7 @@ sessions = [
             id: 110,
             title: "Mindfullness",
             price: 50,
-            image: "img/cat.jpg",
+            Image: "",
             spaces: 5,
             location: "Omdurman"
 
