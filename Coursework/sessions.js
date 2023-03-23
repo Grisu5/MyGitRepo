@@ -95,7 +95,6 @@ sessions = [
             spaces: 5,
             location: "Omdurman"
 
-    },
-    
+    }, 
      
 ]
