@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "express": "^4.18.2",
+    "nodemon": "^2.0.22"
+  },
+  "name": "Elnasir",
+  "author": "EE",
+  "private": "true",
+  "scripts": {
+    "start": "nodemon app4.js"
+  }
+}
