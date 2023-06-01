@@ -1,0 +1,18 @@
+{
+    "name": "Pet App",
+    "origin": "*",
+    "short_name": "PetApp",
+    "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
+    "descripiton": "a practice web app we are doing in class",
+    "icon": [
+        {
+            "src": "img/icon-store-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "index.html",
+    "display": "fullscreen",
+    "background_color": "#B12A34"
+
+}
