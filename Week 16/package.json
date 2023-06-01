@@ -1,0 +1,24 @@
+{
+
+  "name": "Elnasir",
+
+  "author": "EE",
+
+  "private": "true",
+
+  "dependencies": {
+
+    "body-parser": "^1.20.2",
+
+    "body-passer": "^1.0.0",
+
+    "cors": "^2.8.5",
+
+    "express": "^4.18.2",
+
+    "mongodb": "3.6"
+
+  }
+
+}
+

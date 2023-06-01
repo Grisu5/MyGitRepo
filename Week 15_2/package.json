@@ -1,0 +1,17 @@
+{
+
+  "name": "random-number-api",
+
+  "private": "true",
+  
+  "scripts": {
+    "start": "node app"
+  },
+
+  "dependencies": {
+
+
+  }
+
+}
+

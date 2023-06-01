@@ -1,0 +1,74 @@
+[
+    {
+        "title": "Music",
+        "price": 500,
+        "icon": "fa-solid fa-music",
+        "spaces": 5,
+        "location": "Omdurman"
+      },    
+      {
+    
+        "title": "Dance",
+        "price": 700,
+        "icon": "fa-solid fa-drum",
+        "spaces": 5,
+        "location": "Khartoum"
+      },
+      {
+        
+        "title": "Photography",
+        "price": 400,
+        "icon": "fa-solid fa-image",
+        "spaces": 5,
+        "location": "Bahri"
+      },
+      {
+        "title": "Football",
+        "price": 800,
+        "icon": "fa-regular fa-futbol",
+        "spaces": 5,
+        "location": "Khartoum"
+      },
+      {
+        "title": "Film",
+        "price": 700,
+        "icon": "fa-solid fa-film",
+        "spaces": 5,
+        "location": "Bahri"
+      },
+      {
+        "title": "Programming",
+        "price": 100,
+        "icon": "fa-solid fa-code",
+        "spaces": 5,
+        "location": "Omdurman"
+      },
+      {
+        "title": "Graphics Design",
+        "price": 300,
+        "icon": "fa-solid fa-object-group",
+        "spaces": 5,
+        "location": "Bahri"
+      },
+      {
+        "title": "Fashion",
+        "price": 400,
+        "icon": "fa-solid fa-vest-patches",
+        "spaces": 5,
+        "location": "Bahri"
+      },
+      {
+        "title": "Creative writing",
+        "price": 100,
+        "icon": "fa-solid fa-pen",
+        "spaces": 5,
+        "location": "Khartoum"
+      },
+      {
+        "title": "Mindfullness",
+        "price": 50,
+        "icon": "fa-regular fa-circle",
+        "spaces": 5,
+        "location": "Omdurman"
+      }
+]
